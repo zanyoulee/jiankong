@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% for t in test1 %}
+    <table border="1">
+    <tr>
+        <td>{{ t.name }}</td>
+        <td>{{ t.author }}</td>
+    </tr>
+
+    </table>
+{% endfor %}
+</body>
+</html>

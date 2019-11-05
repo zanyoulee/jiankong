@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src=/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <title>分页</title>
+</head>
+
+<br>
+    <div class="container" >
+{#        {% for book in books %}#}
+{#            <span>书名： {{ book }} <br /></span>#}
+{#        {% endfor %}#}
+        <div class="table-responsive">
+       <table class="table table-striped table-bordered">
+         <thead>
+           <tr>
+             <th>书名</th>
+             <th>作者</th>
+             <th>分类</th>
+             <th>豆瓣评分</th>
+             <th>下载链接</th>
+{#             <th>腾讯微云</th>#}
+{#             <th>通城网盘</th>#}
+           </tr>
+         </thead>
+         <tbody>
+           {% for t in books %}
+
+                <tr>
+                    <td>{{ t.name }}</td>
+                    <td>{{ t.author }}</td>
+                    <td>{{ t.fenlei }}</td>
+                    <td>{{ t.score }}</td>
+                    <td>
+                        <a href={{ t.dwlink1 }} >百度网盘下载地址(提取码6666)</a>&nbsp;
+                        {% if t.dwlink2 != "" %}
+                            <a href= {{ t.dwlink2 }}>腾讯微云</a>&nbsp;
+                        {% endif %}
+                        {% if t.dwlink3 != "" %}
+                        <a href={{ t.dwlink3 }}>通城网盘</a>&nbsp;
+                        {% endif %}
+                    </td>
+{#                    <td><a hrep={{ t.dwlink2 }}>百度网盘下载(提取码6666)</a></td>#}
+{#                    <td><a hrep={{ t.dwlink3 }}>百度网盘下载(提取码6666)</a></td>#}
+{#                    <td>{{ t.dwlink2}}</td>#}
+{#                    <td>{{ t.dwlink3}}</td>#}
+                </tr>
+
+            {% endfor %}
+         </tbody>
+       </table>
+      </div>
+    </div>
+
+    {# 实现分页标签的代码 #}
+    {# 这里使用 bootstrap 渲染页面 #}
+    <div id="pages" class="text-center" >
+        <nav>
+            <ul class="pagination">
+                <li class="step-links">
+                {% if books.has_previous %}
+                    <a class='active' href="?page={{ books.previous_page_number }}">上一页</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
+
+                {% if books.has_next %}
+                    <a class='active' href="?page={{ books.next_page_number }}">下一页</a>
+                {% endif %}
+                    <
+                </li>
+            
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
